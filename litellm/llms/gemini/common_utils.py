@@ -74,7 +74,7 @@ class GeminiModelInfo(BaseLLMModelInfo):
 
         litellm_model_names = []
         for model in models:
-            stripped_model_name = model["name"].strip("models/")
+            stripped_model_name = model["name"][len("model/"):] if model["name"].startswith("model/") else model["name"]
             litellm_model_name = "gemini/" + stripped_model_name
             litellm_model_names.append(litellm_model_name)
         return litellm_model_names
